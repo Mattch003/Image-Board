@@ -1,0 +1,12 @@
+<%# User avatar partial — colored circle with the user's first initial.
+   Color is deterministic from the username so each user keeps the same color. %>
+<%
+  const palette = ['#ff9966', '#74e0a0', '#5a9bd4', '#d4a5a5', '#c0b264', '#8aa1c9', '#e8a5d0', '#7fc8a9'];
+  const name = (typeof username !== 'undefined' && username) ? String(username) : '?';
+  let sum = 0;
+  for (let i = 0; i < name.length; i++) sum += name.charCodeAt(i);
+  const color = palette[sum % palette.length];
+  const initial = name.charAt(0).toUpperCase();
+  const px = (typeof size !== 'undefined' && size) ? size : 32;
+%>
+<span class="avatar" style="width: <%= px %>px; height: <%= px %>px; background: <%= color %>; font-size: <%= Math.round(px * 0.45) %>px;" aria-hidden="true"><%= initial %></span>

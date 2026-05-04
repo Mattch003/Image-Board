@@ -1,0 +1,59 @@
+<%# Single-post page — full image, like button, comment thread. %>
+<%- include('partials/header') %>
+
+<article class="post post-detail">
+  <img src="<%= post.image_path %>" alt="" />
+  <div class="post-body">
+    <div class="post-meta">
+      <%- include('partials/avatar', { username: post.username, size: 36 }) %>
+      <div class="post-meta-text">
+        <strong>@<%= post.username %></strong>
+        <span class="muted"><%= new Date(post.created_at).toLocaleString() %></span>
+      </div>
+    </div>
+    <% if (post.caption) { %><p><%= post.caption %></p><% } %>
+    <div class="post-actions">
+      <% if (currentUser) { %>
+        <form action="/posts/<%= post.id %>/<%= post.liked_by_me ? 'unlike' : 'like' %>" method="post" class="inline">
+          <button type="submit" class="like-btn <%= post.liked_by_me ? 'liked' : '' %>">
+            <%= post.liked_by_me ? '♥' : '♡' %> <%= post.like_count %>
+          </button>
+        </form>
+      <% } else { %>
+        <span class="like-btn">♡ <%= post.like_count %></span>
+      <% } %>
+    </div>
+  </div>
+</article>
+
+<section class="comments">
+  <h2>Comments (<%= comments.length %>)</h2>
+
+  <% if (currentUser) { %>
+    <form method="post" action="/posts/<%= post.id %>/comments" class="comment-form">
+      <textarea name="body" rows="2" required maxlength="2000" placeholder="Add a comment..."></textarea>
+      <button type="submit">Post Comment</button>
+    </form>
+  <% } else { %>
+    <p class="muted"><a href="/login">Log in</a> to comment.</p>
+  <% } %>
+
+  <ul class="comment-list">
+    <% comments.forEach(function(c){ %>
+      <li>
+        <div class="comment-row">
+          <%- include('partials/avatar', { username: c.username, size: 32 }) %>
+          <div class="comment-content">
+            <div class="comment-meta">
+              <strong>@<%= c.username %></strong>
+              <span class="muted"><%= new Date(c.created_at).toLocaleString() %></span>
+            </div>
+            <p><%= c.body %></p>
+          </div>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+<%- include('partials/footer') %>

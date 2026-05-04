@@ -1,0 +1,20 @@
+<%# Upload page — image picker + caption, multipart/form-data submission. %>
+<%- include('partials/header') %>
+
+<div class="auth-page">
+  <h1>Upload an Image</h1>
+
+  <form method="post" action="/upload" enctype="multipart/form-data" class="auth-form">
+    <label>
+      <span class="label-row">Image <span class="hint">JPG, PNG, GIF, or WebP — max 8 MB</span></span>
+      <input type="file" name="image" accept="image/*" required />
+    </label>
+    <label>
+      <span class="label-row">Caption <span class="hint">optional</span></span>
+      <textarea name="caption" maxlength="500" rows="3" placeholder="Say something about your image..."></textarea>
+    </label>
+    <button type="submit">Share Post</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

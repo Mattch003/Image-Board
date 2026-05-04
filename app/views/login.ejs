@@ -1,0 +1,20 @@
+<%# Login page — username + password form, posts to /login. %>
+<%- include('partials/header') %>
+
+<div class="auth-page">
+  <h1>Welcome Back</h1>
+
+  <form method="post" action="/login" class="auth-form">
+    <label>Username
+      <input type="text" name="username" required autofocus />
+    </label>
+    <label>Password
+      <input type="password" name="password" required />
+    </label>
+    <button type="submit">Log In</button>
+  </form>
+
+  <p class="muted">Don't have an account? <a href="/register">Register</a>.</p>
+</div>
+
+<%- include('partials/footer') %>

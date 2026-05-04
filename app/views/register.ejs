@@ -1,0 +1,22 @@
+<%# Register page — creates a new account with strong-password rules. %>
+<%- include('partials/header') %>
+
+<div class="auth-page">
+  <h1>Create an Account</h1>
+
+  <form method="post" action="/register" class="auth-form">
+    <label>Username
+      <input type="text" name="username" required minlength="3" maxlength="32" autofocus />
+    </label>
+    <label>Password
+      <input type="password" name="password" required minlength="6"
+             pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{6,}"
+             title="At least 6 characters, with 1 uppercase letter, 1 number, and 1 special symbol." />
+    </label>
+    <button type="submit">Create Account</button>
+  </form>
+
+  <p class="muted">Already have an account? <a href="/login">Log in</a>.</p>
+</div>
+
+<%- include('partials/footer') %>

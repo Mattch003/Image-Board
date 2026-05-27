@@ -1,4 +1,4 @@
-# 📸 Image Board
+# 📸 Image-Sharing Web App
 
 **Stack:** Node.js 18+ · Express · MySQL 8+ · EJS · bcrypt · multer · express-session
 
